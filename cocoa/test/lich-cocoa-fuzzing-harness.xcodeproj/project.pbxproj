@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		793C4392161BE7EC00A54E3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C4391161BE7EC00A54E3D /* Foundation.framework */; };
+		793C4395161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C4394161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness.m */; };
+		793C440A161BEC4F00A54E3D /* LichCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C4407161BEC4F00A54E3D /* LichCocoa.m */; };
+		793C440B161BEC4F00A54E3D /* LichTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C4409161BEC4F00A54E3D /* LichTokenizer.m */; };
+		793C440F161BEC5900A54E3D /* JRErr.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C440E161BEC5900A54E3D /* JRErr.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		793C438B161BE7EC00A54E3D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		793C438D161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "lich-cocoa-fuzzing-harness"; sourceTree = BUILT_PRODUCTS_DIR; };
+		793C4391161BE7EC00A54E3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		793C4394161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "lich-cocoa-fuzzing-harness.m"; sourceTree = "<group>"; };
+		793C4397161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lich-cocoa-fuzzing-harness-Prefix.pch"; sourceTree = "<group>"; };
+		793C4406161BEC4F00A54E3D /* LichCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LichCocoa.h; path = ../../LichCocoa.h; sourceTree = "<group>"; };
+		793C4407161BEC4F00A54E3D /* LichCocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LichCocoa.m; path = ../../LichCocoa.m; sourceTree = "<group>"; };
+		793C4408161BEC4F00A54E3D /* LichTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LichTokenizer.h; path = ../../LichTokenizer.h; sourceTree = "<group>"; };
+		793C4409161BEC4F00A54E3D /* LichTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LichTokenizer.m; path = ../../LichTokenizer.m; sourceTree = "<group>"; };
+		793C440D161BEC5900A54E3D /* JRErr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRErr.h; path = ../../deps/JRErr.h; sourceTree = "<group>"; };
+		793C440E161BEC5900A54E3D /* JRErr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRErr.m; path = ../../deps/JRErr.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		793C438A161BE7EC00A54E3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				793C4392161BE7EC00A54E3D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		793C4382161BE7EC00A54E3D = {
+			isa = PBXGroup;
+			children = (
+				793C4393161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */,
+				793C4390161BE7EC00A54E3D /* Frameworks */,
+				793C438E161BE7EC00A54E3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		793C438E161BE7EC00A54E3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				793C438D161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		793C4390161BE7EC00A54E3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				793C4391161BE7EC00A54E3D /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		793C4393161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */ = {
+			isa = PBXGroup;
+			children = (
+				793C4394161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness.m */,
+				793C4406161BEC4F00A54E3D /* LichCocoa.h */,
+				793C4407161BEC4F00A54E3D /* LichCocoa.m */,
+				793C4408161BEC4F00A54E3D /* LichTokenizer.h */,
+				793C4409161BEC4F00A54E3D /* LichTokenizer.m */,
+				793C440D161BEC5900A54E3D /* JRErr.h */,
+				793C440E161BEC5900A54E3D /* JRErr.m */,
+				793C4396161BE7EC00A54E3D /* Supporting Files */,
+			);
+			path = "lich-cocoa-fuzzing-harness";
+			sourceTree = "<group>";
+		};
+		793C4396161BE7EC00A54E3D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				793C4397161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		793C438C161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 793C439C161BE7EC00A54E3D /* Build configuration list for PBXNativeTarget "lich-cocoa-fuzzing-harness" */;
+			buildPhases = (
+				793C4389161BE7EC00A54E3D /* Sources */,
+				793C438A161BE7EC00A54E3D /* Frameworks */,
+				793C438B161BE7EC00A54E3D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lich-cocoa-fuzzing-harness";
+			productName = "lich-cocoa-fuzzing-harness";
+			productReference = 793C438D161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		793C4384161BE7EC00A54E3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jonathan 'Wolf' Rentzsch";
+			};
+			buildConfigurationList = 793C4387161BE7EC00A54E3D /* Build configuration list for PBXProject "lich-cocoa-fuzzing-harness" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 793C4382161BE7EC00A54E3D;
+			productRefGroup = 793C438E161BE7EC00A54E3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				793C438C161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		793C4389161BE7EC00A54E3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				793C4395161BE7EC00A54E3D /* lich-cocoa-fuzzing-harness.m in Sources */,
+				793C440A161BEC4F00A54E3D /* LichCocoa.m in Sources */,
+				793C440B161BEC4F00A54E3D /* LichTokenizer.m in Sources */,
+				793C440F161BEC5900A54E3D /* JRErr.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		793C439A161BE7EC00A54E3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		793C439B161BE7EC00A54E3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		793C439D161BE7EC00A54E3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lich-cocoa-fuzzing-harness/lich-cocoa-fuzzing-harness-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		793C439E161BE7EC00A54E3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lich-cocoa-fuzzing-harness/lich-cocoa-fuzzing-harness-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		793C4387161BE7EC00A54E3D /* Build configuration list for PBXProject "lich-cocoa-fuzzing-harness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				793C439A161BE7EC00A54E3D /* Debug */,
+				793C439B161BE7EC00A54E3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		793C439C161BE7EC00A54E3D /* Build configuration list for PBXNativeTarget "lich-cocoa-fuzzing-harness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				793C439D161BE7EC00A54E3D /* Debug */,
+				793C439E161BE7EC00A54E3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 793C4384161BE7EC00A54E3D /* Project object */;
+}
