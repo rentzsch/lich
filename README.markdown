@@ -63,7 +63,7 @@ And in JSON:
 Here's a pseudo-BNF grammar for Lich:
 
 	document            ::=  elements*
-	element             ::=  data_element | array_element | 	dictionary_element
+	element             ::=  data_element | array_element | dictionary_element
 	data_element        ::=  size '<' bytes* '>'
 	array_element       ::=  size '[' elements* ']'
 	dictionary_element  ::=  size '{' key_value* '}'
