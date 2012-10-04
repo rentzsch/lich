@@ -1,5 +1,7 @@
-//  Copyright (c) 2012 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
-//  Some rights reserved: http://opensource.org/licenses/mit
+// LichTokenizer.m semver:0.1
+//   Copyright (c) 2012 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
+//   Some rights reserved: http://opensource.org/licenses/mit
+//   https://github.com/rentzsch/lich
 
 #import "LichTokenizer.h"
 #import "JRErr.h"
