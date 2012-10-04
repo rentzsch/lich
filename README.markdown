@@ -106,3 +106,8 @@ How ghoulishly poetic.
 * [HTML](http://en.wikipedia.org/wiki/Html)/[XML](http://en.wikipedia.org/wiki/Xml)
 * [JSON](http://en.wikipedia.org/wiki/Json)
 * [bencode](http://en.wikipedia.org/wiki/Bencode)
+
+### See Also
+
+* [Tagged Netstrings](http://tnetstrings.org/) (thanks to [
+Benjamin Pollack](https://twitter.com/bitquabit/status/253961353402925057))
