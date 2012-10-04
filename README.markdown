@@ -70,6 +70,14 @@ Here's a pseudo-BNF grammar for Lich:
 	key_value           ::=  data_element element
 	size                ::=  [0-9]{1,20}
 
+### Implementation Notes
+
+Lich should be able to be implemented in any practical language. Contributions welcome.
+
+LichCocoa (in the `cocoa/` directory) is an implementation of Lich in Objective-C for Cocoa. It should work on both Mac and iOS. It can encode and decode NSData, NSArray and NSDictionaries to Lich and back.
+
+Expected-valid and expected-invalid encoding and decoding examples reside in `loch-tests.json`. Run `rake` in Lich's project directory to build `TestLichCocoa`, a helper tool, and run through the test examples.
+
 ### Canonical Format
 
 Lich is a straight-forward data format with little leeway, but if you need to generate a canonical stream for crypto purposes, there's one additional generation rule:
