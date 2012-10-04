@@ -64,8 +64,8 @@ Here's a pseudo-BNF grammar for Lich:
 
 	document            ::=  elements*
 	element             ::=  data_element | array_element | dictionary_element
-	data_element        ::=  size '<' bytes* '>'
-	array_element       ::=  size '[' elements* ']'
+	data_element        ::=  size '<' byte* '>'
+	array_element       ::=  size '[' element* ']'
 	dictionary_element  ::=  size '{' key_value* '}'
 	key_value           ::=  data_element element
 	size                ::=  [0-9]{1,20}
