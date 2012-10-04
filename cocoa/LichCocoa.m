@@ -34,10 +34,39 @@
         } else if ([obj isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dictObj = obj;
             
-            // TODO: sort keys (taking into account data keys and string keys).
+            for (id key in dictObj) {
+                if (![key isKindOfClass:[NSData class]]) {
+                    JRThrowErrMsg(([NSString stringWithFormat:@"Couldn't Lich-encode %@", obj]),
+                                  ([NSString stringWithFormat:@"Dictionary key %@ must be of type NSData", key]));
+                }
+            }
+            
+            NSArray *keys = [dictObj allKeys];
+            keys = [keys sortedArrayUsingComparator:^NSComparisonResult(NSData *obj1, NSData *obj2) {
+                NSUInteger obj1Length = [obj1 length];
+                NSUInteger obj2Length = [obj2 length];
+                
+                if (obj1Length < obj2Length) {
+                    return NSOrderedAscending;
+                } else if (obj1Length > obj2Length) {
+                    return NSOrderedDescending;
+                } else {
+                    const uint8_t *obj1Bytes = [obj1 bytes];
+                    const uint8_t *obj2Bytes = [obj2 bytes];
+                    
+                    for (NSUInteger byteIdx = 0; byteIdx < obj1Length; byteIdx++) {
+                        if (obj1Bytes[byteIdx] < obj2Bytes[byteIdx]) {
+                            return NSOrderedAscending;
+                        } else if (obj1Bytes[byteIdx] > obj2Bytes[byteIdx]) {
+                            return NSOrderedDescending;
+                        }
+                    }
+                    return NSOrderedSame;
+                }
+            }];
             
             NSMutableData *contentData = [NSMutableData data];
-            for (id keyObj in dictObj) {
+            for (id keyObj in keys) {
                 NSData *keyData;
                 if ([keyObj isKindOfClass:[NSData class]]) {
                     keyData = keyObj;
