@@ -1,0 +1,45 @@
+{
+	"valid": [
+		"",
+		"0<>",
+		"0[]",
+		"0{}",
+		"0<>0<>",
+		"1<z>",
+		"1<z>1<z>",
+		"1<z>1<z>1<z>",
+		"3[0<>]",
+		"6{0<>0<>}",
+		"6[0<>0<>]",
+		"6[3[0<>]]"
+	],
+	"invalid": [
+		["x", "LichTokenizerError_MissingSizePrefix", 0],
+		["-", "LichTokenizerError_MissingSizePrefix", 0],
+		[".", "LichTokenizerError_MissingSizePrefix", 0],
+		["<", "LichTokenizerError_MissingSizePrefix", 0],
+		["[", "LichTokenizerError_MissingSizePrefix", 0],
+		["{", "LichTokenizerError_MissingSizePrefix", 0],
+		[">", "LichTokenizerError_MissingSizePrefix", 0],
+		["]", "LichTokenizerError_MissingSizePrefix", 0],
+		["}", "LichTokenizerError_MissingSizePrefix", 0],
+		["(", "LichTokenizerError_MissingSizePrefix", 0],
+		[")", "LichTokenizerError_MissingSizePrefix", 0],
+		
+		["1<>", "LichTokenizerError_MissingClosingMarker", 3],
+		["2<>", "LichTokenizerError_IncompleteData", 3],
+		["9<>", "LichTokenizerError_IncompleteData", 3],
+		["3[0<>0<>]", "LichTokenizerError_IncorrectClosingMarker", 5]
+	],
+	"encoding": [
+		["", "0<>"],
+		["x", "1<x>"],
+		[[], "0[]"],
+		[[""], "3[0<>]"],
+		[{}, "0{}"],
+		[{"":""}, "6{0<>0<>}"],
+		[{"a":""}, "7{1<a>0<>}"],
+		[{"k1":"v1", "k2":"v2"}, "20{2<k1>2<v1>2<k2>2<v2>}"],
+		[{"k1":["x"]}, "12{2<k1>4[1<x>]}"]
+	]
+}
