@@ -127,38 +127,44 @@ static id nilIsNull(id obj) {
                         self.currentToken->parsedSize = strtoull([self.sizeAccumulator UTF8String],
                                                                  NULL,
                                                                  10);
-                        self.sizeAccumulator = nil;
-                        if (self.currentToken->parsedSize) {
-                            self.currentToken->contentRange = NSMakeRange(self.inputPos + 1,
-                                                                          self.currentToken->parsedSize);
-                        } else {
-                            self.currentToken->contentRange = NSMakeRange(NSNotFound, 0);
+                        if (errno == ERANGE) {
+                            [self parseError:LichTokenizerError_ExcessiveSizePrefix userInfo:JRMakeErrUserInfo()];
                         }
-                        self.currentToken->closingMarkerRange = NSMakeRange(self.inputPos
-                                                                            + 1
-                                                                            + self.currentToken->parsedSize,
-                                                                            1);
-                        switch (b) {
-                            case '<':
-                                self.currentToken->parsedType = LichDataElementType;
-                                self.state = self.currentToken->parsedSize
-                                    ? LichTokenizerState_ExpectingDataBytes
-                                    : LichTokenizerState_ExpectingCloseMarker;
-                                break;
-                            case '[':
-                                self.currentToken->parsedType = LichArrayElementType;
-                                self.state = self.currentToken->parsedSize
-                                    ? LichTokenizerState_ExpectingLeadingSizeDigit
-                                    : LichTokenizerState_ExpectingCloseMarker;
-                                break;
-                            case '{':
-                                self.currentToken->parsedType = LichDictionaryElementType;
-                                self.state = self.currentToken->parsedSize
-                                    ? LichTokenizerState_ExpectingLeadingSizeDigit
-                                    : LichTokenizerState_ExpectingCloseMarker;
-                                break;
+                        
+                        if (!jrErr) {
+                            self.sizeAccumulator = nil;
+                            if (self.currentToken->parsedSize) {
+                                self.currentToken->contentRange = NSMakeRange(self.inputPos + 1,
+                                                                              self.currentToken->parsedSize);
+                            } else {
+                                self.currentToken->contentRange = NSMakeRange(NSNotFound, 0);
+                            }
+                            self.currentToken->closingMarkerRange = NSMakeRange(self.inputPos
+                                                                                + 1
+                                                                                + self.currentToken->parsedSize,
+                                                                                1);
+                            switch (b) {
+                                case '<':
+                                    self.currentToken->parsedType = LichDataElementType;
+                                    self.state = self.currentToken->parsedSize
+                                        ? LichTokenizerState_ExpectingDataBytes
+                                        : LichTokenizerState_ExpectingCloseMarker;
+                                    break;
+                                case '[':
+                                    self.currentToken->parsedType = LichArrayElementType;
+                                    self.state = self.currentToken->parsedSize
+                                        ? LichTokenizerState_ExpectingLeadingSizeDigit
+                                        : LichTokenizerState_ExpectingCloseMarker;
+                                    break;
+                                case '{':
+                                    self.currentToken->parsedType = LichDictionaryElementType;
+                                    self.state = self.currentToken->parsedSize
+                                        ? LichTokenizerState_ExpectingLeadingSizeDigit
+                                        : LichTokenizerState_ExpectingCloseMarker;
+                                    break;
+                            }
+                            [self.observer lichTokenizer:self beginToken:self.currentToken];
                         }
-                        [self.observer lichTokenizer:self beginToken:self.currentToken];
                     } else {
                         [self parseError:LichTokenizerError_InvalidSizePrefix userInfo:JRMakeErrUserInfo()];
                     }
