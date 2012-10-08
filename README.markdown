@@ -68,7 +68,7 @@ Here's a pseudo-BNF grammar for Lich:
 	array_element       ::=  size '[' element* ']'
 	dictionary_element  ::=  size '{' key_value* '}'
 	key_value           ::=  data_element element
-	size                ::=  [0-9]{1,20}
+	size                ::=  [0-9]{1,20} # Note: must fit into an uint64_t (<= 18,446,744,073,709,551,615 (2^64-1))
 
 ### Implementation Notes
 
