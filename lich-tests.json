@@ -29,7 +29,11 @@
 		["1<>", "LichTokenizerError_MissingClosingMarker", 3],
 		["2<>", "LichTokenizerError_IncompleteData", 3],
 		["9<>", "LichTokenizerError_IncompleteData", 3],
-		["3[0<>0<>]", "LichTokenizerError_IncorrectClosingMarker", 5]
+		["3[0<>0<>]", "LichTokenizerError_IncorrectClosingMarker", 5],
+		
+		["18446744073709551615<>", "LichTokenizerError_IncompleteData", 22],
+		["18446744073709551616<>", "LichTokenizerError_ExcessiveSizePrefix", 20],
+		["99999999999999999999<>", "LichTokenizerError_ExcessiveSizePrefix", 20]
 	],
 	"encoding": [
 		["", "0<>"],
