@@ -111,3 +111,9 @@ How ghoulishly poetic.
 
 * [Tagged Netstrings](http://tnetstrings.org/) (thanks to [
 Benjamin Pollack](https://twitter.com/bitquabit/status/253961353402925057))
+
+### Version History
+
+### v0.1: Thu Oct 04 2012
+
+* Initial Announcement.
