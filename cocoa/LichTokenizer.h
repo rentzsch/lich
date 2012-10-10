@@ -1,4 +1,4 @@
-// LichTokenizer.h semver:0.1
+// LichTokenizer.h semver:0.2
 //   Copyright (c) 2012 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //   Some rights reserved: http://opensource.org/licenses/mit
 //   https://github.com/rentzsch/lich
@@ -67,15 +67,15 @@ extern NSData * const LichTokenizerEOF;
 
 extern NSString * const LichTokenizerErrorDomain;
 typedef enum {
-    LichTokenizerError_MissingSizePrefix,
-    LichTokenizerError_InvalidSizePrefix,
-    LichTokenizerError_ExcessiveSizePrefix,
-    LichTokenizerError_IncompleteSizePrefix,
+    LichError_MissingSizePrefix,
+    LichError_InvalidSizePrefix,
+    LichError_ExcessiveSizePrefix,
+    LichError_IncompleteSizePrefix,
     
-    LichTokenizerError_IncompleteData,
+    LichError_IncompleteData,
     
-    LichTokenizerError_MissingClosingMarker,
-    LichTokenizerError_IncorrectClosingMarker,
+    LichError_MissingClosingMarker,
+    LichError_IncorrectClosingMarker,
 } LichTokenizerErrorCode;
 
 extern NSString* NSStringFromLichTokenizerErrorCode(LichTokenizerErrorCode code);

@@ -1,4 +1,4 @@
-// LichTokenizer.m semver:0.1
+// LichTokenizer.m semver:0.2
 //   Copyright (c) 2012 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //   Some rights reserved: http://opensource.org/licenses/mit
 //   https://github.com/rentzsch/lich
@@ -110,7 +110,7 @@ static id nilIsNull(id obj) {
                         [self pushNewCurrentTokenWithInputPositionAndByte:b];
                         self.state = LichTokenizerState_ExpectingAdditionalSizeDigitOrOpenMarker;
                     } else {
-                        [self parseError:LichTokenizerError_MissingSizePrefix userInfo:JRMakeErrUserInfo()];
+                        [self parseError:LichError_MissingSizePrefix userInfo:JRMakeErrUserInfo()];
                     }
                     break;
                 case LichTokenizerState_ExpectingAdditionalSizeDigitOrOpenMarker:
@@ -120,7 +120,7 @@ static id nilIsNull(id obj) {
                             self.currentToken->sizeDeclarationRange.length++;
                             [self.sizeAccumulator appendFormat:@"%c", b];
                         } else {
-                            [self parseError:LichTokenizerError_ExcessiveSizePrefix userInfo:JRMakeErrUserInfo()];
+                            [self parseError:LichError_ExcessiveSizePrefix userInfo:JRMakeErrUserInfo()];
                         }
                     } else if (b == '<' || b == '[' || b == '{') {
                         self.currentToken->openingMarkerRange = NSMakeRange(self.inputPos, 1);
@@ -128,7 +128,7 @@ static id nilIsNull(id obj) {
                                                                  NULL,
                                                                  10);
                         if (errno == ERANGE) {
-                            [self parseError:LichTokenizerError_ExcessiveSizePrefix userInfo:JRMakeErrUserInfo()];
+                            [self parseError:LichError_ExcessiveSizePrefix userInfo:JRMakeErrUserInfo()];
                         }
                         
                         if (!jrErr) {
@@ -166,7 +166,7 @@ static id nilIsNull(id obj) {
                             [self.observer lichTokenizer:self beginToken:self.currentToken];
                         }
                     } else {
-                        [self parseError:LichTokenizerError_InvalidSizePrefix userInfo:JRMakeErrUserInfo()];
+                        [self parseError:LichError_InvalidSizePrefix userInfo:JRMakeErrUserInfo()];
                     }
                     break;
                 case LichTokenizerState_ExpectingDataBytes: {
@@ -197,7 +197,7 @@ static id nilIsNull(id obj) {
                         }
                         self.currentToken = self.currentToken.parent;
                     } else {
-                        [self parseError:LichTokenizerError_IncorrectClosingMarker userInfo:JRMakeErrUserInfo()];
+                        [self parseError:LichError_IncorrectClosingMarker userInfo:JRMakeErrUserInfo()];
                     }
                 }   break;
                 default:
@@ -209,17 +209,17 @@ static id nilIsNull(id obj) {
         // EOF.
         switch (_state) {
             case LichTokenizerState_ExpectingLeadingSizeDigit:
-                //[self parseError:LichTokenizerError_MissingSizePrefix];
+                //[self parseError:LichError_MissingSizePrefix];
                 // No-op.
                 break;
             case LichTokenizerState_ExpectingAdditionalSizeDigitOrOpenMarker:
-                [self parseError:LichTokenizerError_IncompleteSizePrefix userInfo:JRMakeErrUserInfo()];
+                [self parseError:LichError_IncompleteSizePrefix userInfo:JRMakeErrUserInfo()];
                 break;
             case LichTokenizerState_ExpectingDataBytes:
-                [self parseError:LichTokenizerError_IncompleteData userInfo:JRMakeErrUserInfo()];
+                [self parseError:LichError_IncompleteData userInfo:JRMakeErrUserInfo()];
                 break;
             case LichTokenizerState_ExpectingCloseMarker:
-                [self parseError:LichTokenizerError_MissingClosingMarker userInfo:JRMakeErrUserInfo()];
+                [self parseError:LichError_MissingClosingMarker userInfo:JRMakeErrUserInfo()];
                 break;
             case LichTokenizerState_AwaitingInitialData:
                 NSAssert1(NO, @"unknown LichTokenizerState: %d", _state);
@@ -280,21 +280,21 @@ NSString* NSStringFromLichElementType(LichElementType type) {
 
 NSString* NSStringFromLichTokenizerErrorCode(LichTokenizerErrorCode code) {
     switch (code) {
-        case LichTokenizerError_MissingSizePrefix:
-            return @"LichTokenizerError_MissingSizePrefix";
-        case LichTokenizerError_InvalidSizePrefix:
-            return @"LichTokenizerError_InvalidSizePrefix";
-        case LichTokenizerError_ExcessiveSizePrefix:
-            return @"LichTokenizerError_ExcessiveSizePrefix";
-        case LichTokenizerError_IncompleteSizePrefix:
-            return @"LichTokenizerError_IncompleteSizePrefix";
-        case LichTokenizerError_IncompleteData:
-            return @"LichTokenizerError_IncompleteData";
-        case LichTokenizerError_MissingClosingMarker:
-            return @"LichTokenizerError_MissingClosingMarker";
-        case LichTokenizerError_IncorrectClosingMarker:
-            return @"LichTokenizerError_IncorrectClosingMarker";
+        case LichError_MissingSizePrefix:
+            return @"LichError_MissingSizePrefix";
+        case LichError_InvalidSizePrefix:
+            return @"LichError_InvalidSizePrefix";
+        case LichError_ExcessiveSizePrefix:
+            return @"LichError_ExcessiveSizePrefix";
+        case LichError_IncompleteSizePrefix:
+            return @"LichError_IncompleteSizePrefix";
+        case LichError_IncompleteData:
+            return @"LichError_IncompleteData";
+        case LichError_MissingClosingMarker:
+            return @"LichError_MissingClosingMarker";
+        case LichError_IncorrectClosingMarker:
+            return @"LichError_IncorrectClosingMarker";
         default:
-            NSCAssert1(NO, @"unknown LichTokenizerErrorCode: %d", code);
+            NSCAssert1(NO, @"unknown LichErrorCode: %d", code);
     }
 }
