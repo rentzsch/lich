@@ -33,17 +33,17 @@ parseElement = try parseData <|> try parseArray <|> try parseDict
 
 parseData = do
   size <- parseSize
-  data' <- between (char '<') (char '>') $ count size anyChar
+  data' <- between (char '<') (char '>' <?> "closing marker") (count size anyChar <?> "incomplete data")
   return $ Data (C.pack data')
 
 parseArray = do
   size  <- parseSize
-  text <- between (char '[') (char ']') $ C.pack <$> count size anyChar
+  text <- between (char '[') (char ']' <?> "closing marker") (C.pack <$> count size anyChar <?> "incomplete data")
   Array <$> recurWith parseElement text
 
 parseDict = do
   size  <- parseSize
-  elems <- between (char '{') (char '}') $ C.pack <$> count size anyChar
+  elems <- between (char '{') (char '}' <?> "closing marker") (C.pack <$> count size anyChar <?> "incomplete data")
   Dict <$> M.fromList <$> recurWith parseKey elems
 
 parseKey :: Parser (LichData, Lich)
@@ -53,7 +53,7 @@ parseKey = liftM2 (,) parseDataRaw parseElement
         go x         = unexpected (show x)
 
 parseSize :: Parser Int
-parseSize = read <$> (some digit)
+parseSize = read <$> (some digit) <?> "size prefix"
 
 lichTest :: String -> IO ()
 lichTest s = parseTest parseDocument $ C.pack s
