@@ -1,44 +1,50 @@
 import Control.Applicative
 import Control.Monad
+import Data.ByteString (ByteString)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as C
+import Data.Map (Map)
 import qualified Data.Map as M
 import Text.Parsec hiding ((<|>), many)
+import Text.PrettyPrint.HughesPJ ((<>), brackets, text, braces, hsep)
 import qualified Text.PrettyPrint.HughesPJ as P
+import Debug.Trace
 
-type Parser = Parsec B.ByteString ()
+type Parser = Parsec ByteString ()
 
-type LichData = B.ByteString
+type LichData = ByteString
 
 data Lich = Data LichData
           | Array [Lich]
-          | Dict (M.Map LichData Lich)
+          | Dict (Map LichData Lich)
           deriving (Show)
 
-parseDocument = (many1 parseElement) <|> (eof *> pure [])
+recurWith :: Parser a -> ByteString -> Parser [a]
+recurWith parser s = do
+  i <- getInput
+  setInput s
+  r <- (many parser <* eof)
+  setInput i
+  return r
+
+parseDocument = (some parseElement) <|> (eof *> pure [])
 
 parseElement = try parseData <|> try parseArray <|> try parseDict
 
 parseData = do
   size <- parseSize
-  data' <- char '<' *> count size anyChar <* char '>'
+  data' <- between (char '<') (char '>') $ count size anyChar
   return $ Data (C.pack data')
 
 parseArray = do
   size  <- parseSize
-  char '['
-  lookAhead $ count size anyChar
-  elems <- many parseElement
-  char ']'
-  return (Array elems)
+  text <- between (char '[') (char ']') $ C.pack <$> count size anyChar
+  Array <$> recurWith parseElement text
 
 parseDict = do
   size  <- parseSize
-  char '{'
-  lookAhead $ count size anyChar
-  elems <- many parseKey
-  char '}'
-  return (Dict $ M.fromList elems)
+  elems <- between (char '{') (char '}') $ C.pack <$> count size anyChar
+  Dict <$> M.fromList <$> recurWith parseKey elems
 
 parseKey :: Parser (LichData, Lich)
 parseKey = liftM2 (,) parseDataRaw parseElement
@@ -47,11 +53,10 @@ parseKey = liftM2 (,) parseDataRaw parseElement
         go x         = unexpected (show x)
 
 parseSize :: Parser Int
-parseSize = read <$> (many1 digit)
+parseSize = read <$> (some digit)
 
 lichTest :: String -> IO ()
 lichTest s = parseTest parseDocument $ C.pack s
-
 
 encodeLich :: Lich -> B.ByteString
 encodeLich = C.pack . show . prettyLich
@@ -68,9 +73,3 @@ prettyLich (Dict m)         = docLength contents <> braces contents
 
 docLength = P.int . length . P.render
 angleBrackets d = P.char '<' <> d <> P.char '>'
-
-(<>) = (P.<>)
-brackets = P.brackets
-text = P.text
-braces = P.braces
-hsep = P.hsep
