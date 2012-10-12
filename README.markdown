@@ -48,7 +48,7 @@ Same thing in JSON:
 
 And of course you can nest structures:
 
-	126{14<selling points>40[6<simple>7<general>19<human-sympathetic>]8<greeting>11<hello world>5<fruit>26[5<apple>6<banana>6<orange>]}
+	126{14<selling points>40[6<simple>7<general>17<human-sympathetic>]8<greeting>11<hello world>5<fruit>26[5<apple>6<banana>6<orange>]}
 
 And in JSON:
 
