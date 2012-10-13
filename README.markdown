@@ -80,9 +80,10 @@ Expected-valid and expected-invalid encoding and decoding examples reside in `lo
 
 ### Canonical Format
 
-Lich is a straight-forward data format with little leeway, but if you need to generate a canonical stream for crypto purposes, there's one additional generation rule:
+Lich is a straight-forward data format with little leeway, but if you need to generate a canonical stream for crypto purposes, there's two additional generation rules:
 
-* Dictionary key-value pairs are sorted data-wise by their key.
+1. Dictionary key-value pairs are sorted data-wise by their key.
+2. Sizes have leading zeros suppressed ([issue 4](https://github.com/rentzsch/lich/issues/4)).
 
 The LichCocoa implementation automatically does this for you when generating Lich streams (but doesn't enforce dictionary key ordering when parsing).
 
