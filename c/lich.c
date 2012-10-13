@@ -1,4 +1,4 @@
-// Source & license: see https://github.com/kr/clich
+// Source & license: see https://github.com/rentzsch/lich/tree/master/c
 #include <stdint.h>
 #include "lich.h"
 
