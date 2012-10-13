@@ -76,7 +76,7 @@ Lich should be able to be implemented in any practical language. Contributions w
 
 LichCocoa (in the `cocoa/` directory) is an implementation of Lich in Objective-C for Cocoa. It should work on both Mac and iOS. It can encode and decode NSData, NSArray and NSDictionaries to Lich and back.
 
-Expected-valid and expected-invalid encoding and decoding examples reside in `loch-tests.json`. Run `rake` in Lich's project directory to build `TestLichCocoa`, a helper tool, and run through the test examples.
+Expected-valid and expected-invalid encoding and decoding examples reside in `loch-tests.json`. Run `rake` in Lich's project directory to build `TestLichCocoa` (a helper tool) and run through the test examples.
 
 ### Canonical Format
 
