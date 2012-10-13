@@ -1,0 +1,14 @@
+This is a parser for the Lich[1] data format, written in C.
+It's not much code (about 160 lines), and intended to be
+copied into your project. You need two files:
+
+	lich.h
+	lich.c
+
+The interface for this code is small. It's designed in the
+same vein as https://github.com/kr/json. In other words,
+this parser doesn't do very much; it really only parses.
+Doesn't do any converting or creating of higher-level data
+structures for you.
+
+[1]: https://github.com/rentzsch/lich
