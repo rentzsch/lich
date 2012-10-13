@@ -9,7 +9,6 @@ typedef struct Parser Parser;
 
 struct Parser {
 	char *s;
-	char *end;
 	int  n;
 	Lich *j;
 	int  nj;
@@ -139,27 +138,15 @@ parseelem(Parser *p, Lich *parent, Lich **prev)
 }
 
 
-static int
-parsedoc(Parser *p)
-{
-	Lich *prev = nil;
-	while (p->s < p->end) {
-		must(parseelem(p, nil, &prev));
-	}
-	return 1;
-}
-
-
 // See lich.h for documentation.
 int
 lichparse(char *src, uint64_t len, Lich *part, int npart)
 {
 	Parser p = {};
 	p.s = src;
-	p.end = src + len;
 	p.j = part;
 	p.nj = npart;
-	if (!parsedoc(&p)) {
+	if (!parsearray(&p, nil, len)) {
 		return -1;
 	}
 	return p.n;
