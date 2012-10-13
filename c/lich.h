@@ -7,12 +7,15 @@ struct Lich {
 	char     *src;
 	char     *end; // src + len
 	Lich     *parent;
+	Lich     *next;
+	Lich     *prev;
 };
 
-// Scans src and fills in elements of part with pointers to the lexical
-// bounds of Lich elements.
+// Scans src and fills in at most nelem elements of elem with
+// pointers to the lexical bounds of Lich elements. Elements
+// are written to elem in the order they appear in src.
 //
 // Returns the total number of elements in src (which may be 0),
-// regardless of npart.
+// regardless of nelem.
 // If src is not well-formed Lich data, returns -1.
-int lichparse(char *src, uint64_t len, Lich *part, int npart);
+int lichparse(char *src, uint64_t len, Lich *elem, int nelem);

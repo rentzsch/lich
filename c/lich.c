@@ -15,7 +15,7 @@ struct Parser {
 	int  nj;
 };
 
-static int parseelem(Parser*, Lich*);
+static int parseelem(Parser*, Lich*, Lich**);
 
 
 static int
@@ -43,7 +43,7 @@ scanlen(Parser *p, uint64_t *len)
 
 
 static Lich *
-inititem(Parser *p, Lich *parent, uint64_t len, char type)
+inititem(Parser *p, Lich *parent, Lich **prev, uint64_t len, char type)
 {
 	p->n++;
 	if (p->nj > 0) {
@@ -55,6 +55,12 @@ inititem(Parser *p, Lich *parent, uint64_t len, char type)
 		v->src = p->s;
 		v->end = p->s + len;
 		v->parent = parent;
+		v->next = nil;
+		v->prev = *prev;
+		if (*prev) {
+			(*prev)->next = v;
+		}
+		*prev = v;
 		return v;
 	}
 	return nil;
@@ -62,14 +68,14 @@ inititem(Parser *p, Lich *parent, uint64_t len, char type)
 
 
 static int
-parsedata(Parser *p, Lich *parent)
+parsedata(Parser *p, Lich *parent, Lich **prev)
 {
 	char c;
 	uint64_t len;
 
 	must(scanlen(p, &len));
 	c = *p->s++;
-	inititem(p, parent, len, c);
+	inititem(p, parent, prev, len, c);
 	switch (c) {
 	case '<':
 		p->s += len;
@@ -83,10 +89,11 @@ parsedata(Parser *p, Lich *parent)
 static int
 parsedict(Parser *p, Lich *self, uint64_t len)
 {
+	Lich *kprev = nil, *vprev = nil;
 	char *end = p->s + len;
 	while (p->s < end) {
-		must(parsedata(p, self));
-		must(parseelem(p, self));
+		must(parsedata(p, self, &kprev));
+		must(parseelem(p, self, &vprev));
 	}
 	return 1;
 }
@@ -95,16 +102,17 @@ parsedict(Parser *p, Lich *self, uint64_t len)
 static int
 parsearray(Parser *p, Lich *self, uint64_t len)
 {
+	Lich *prev = nil;
 	char *end = p->s + len;
 	while (p->s < end) {
-		must(parseelem(p, self));
+		must(parseelem(p, self, &prev));
 	}
 	return 1;
 }
 
 
 static int
-parseelem(Parser *p, Lich *parent)
+parseelem(Parser *p, Lich *parent, Lich **prev)
 {
 	char c;
 	Lich *v;
@@ -112,7 +120,7 @@ parseelem(Parser *p, Lich *parent)
 
 	must(scanlen(p, &len));
 	c = *p->s++;
-	v = inititem(p, parent, len, c);
+	v = inititem(p, parent, prev, len, c);
 	switch (c) {
 	case '{':
 		must(parsedict(p, v, len));
@@ -134,19 +142,15 @@ parseelem(Parser *p, Lich *parent)
 static int
 parsedoc(Parser *p)
 {
+	Lich *prev = nil;
 	while (p->s < p->end) {
-		must(parseelem(p, nil));
+		must(parseelem(p, nil, &prev));
 	}
 	return 1;
 }
 
 
-// Scans src and fills in elements of part with pointers to the lexical
-// bounds of Lich elements.
-//
-// Returns the total number of elements in src (which may be 0),
-// regardless of npart.
-// If src is not well-formed Lich data, returns -1.
+// See lich.h for documentation.
 int
 lichparse(char *src, uint64_t len, Lich *part, int npart)
 {

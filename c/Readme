@@ -11,4 +11,30 @@ this parser doesn't do very much; it really only parses.
 Doesn't do any converting or creating of higher-level data
 structures for you.
 
+
+How to use it (error handling omitted):
+
+	Lich *elem;
+	int nelem;
+
+	nelem = lichparse(src, len, NULL, 0); // 1. count elements
+	elem = calloc(nelem, sizeof(Lich));   // 2. allocate them
+	lichparse(src, len, elem, nelem);     // 3. parse them
+
+If you know beforehand how many elements to expect, you can
+of course skip step 1 above.
+
+
+Tips for traversing the output data:
+
+ - The children of a Lich array form a linked list. The
+   first child of a Lich array at elem[n] is at elem[n+1],
+   and the second child is at elem[n+1].next.
+
+ - The keys and values of a Lich dictionary form two linked
+   lists. The first key and value in dict at elem[n] are at
+   elem[n+1] and elem[n+2], and the second ones are at
+   elem[n+1].next and elem[n+2].next.
+
+
 [1]: https://github.com/rentzsch/lich
