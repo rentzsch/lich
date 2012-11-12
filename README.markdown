@@ -112,6 +112,7 @@ How ghoulishly poetic.
 
 * [Tagged Netstrings](http://tnetstrings.org/) (thanks to [
 Benjamin Pollack](https://twitter.com/bitquabit/status/253961353402925057))
+* [MessagePack](http://msgpack.org/)
 
 ### Version History
 
