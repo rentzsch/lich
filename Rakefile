@@ -2,7 +2,7 @@ desc 'Build'
 task :build do
   puts "\n=== Building ==="
   
-  system('cd cocoa && clang -o test/TestLichCocoa -Wno-unused-value -framework Foundation -I. -Ideps *.m deps/JRErr.m test/TestLichCocoa.m')
+  system('cd cocoa && clang -o test/TestLichCocoa -Wno-unused-value -framework Foundation -I. -Idependancies/JRErr/JRErr *.m dependancies/JRErr/JRErr/JRErr.m test/TestLichCocoa.m')
   puts '!!! FAILED !!!' if $?.exitstatus != 0
 end
 
