@@ -1,5 +1,5 @@
-// LichCocoa.h semver:0.2
-//   Copyright (c) 2012 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
+// LichCocoa.h semver:0.3
+//   Copyright (c) 2012-2014 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //   Some rights reserved: http://opensource.org/licenses/mit
 //   https://github.com/rentzsch/lich
 
