@@ -80,7 +80,10 @@ int main(int argc, const char *argv[]) {
                 for (NSString *validString in validStrings) {
                     //printf("^%s\n", [validString UTF8String]);
                     NSData *validData = JRThrowErr([validString dataUsingEncoding:NSASCIIStringEncoding]);
-                    LichDecoder *decoder = [[[LichDecoder alloc] init] autorelease];
+                    LichDecoder *decoder = [[LichDecoder alloc] init];
+#if !__has_feature(objc_arc)
+                    [decoder autorelease];
+#endif
                     @try {
                         if ([validString length]) {
                             JRThrowErr([decoder decodeData:validData error:jrErrRef]);
@@ -103,7 +106,10 @@ int main(int argc, const char *argv[]) {
                     
                     NSError *actualError = nil;
                     
-                    LichDecoder *decoder = [[[LichDecoder alloc] init] autorelease];
+                    LichDecoder *decoder = [[LichDecoder alloc] init];
+#if !__has_feature(objc_arc)
+                    [decoder autorelease];
+#endif
                     if ([decoder decodeData:invalidData error:&actualError]) {
                         assert(!actualError);
                         
@@ -141,16 +147,23 @@ int main(int argc, const char *argv[]) {
                     
                     id object = convertNSStringToNSData(originalObject);
                     
-                    LichEncoder *encoder = [[[LichEncoder alloc] init] autorelease];
+                    LichEncoder *encoder = [[LichEncoder alloc] init];
+#if !__has_feature(objc_arc)
+                    [encoder autorelease];
+#endif
                     NSData *actualData = JRThrowErr([encoder encodeObject:object error:jrErrRef]);
                     
                     if (![expectedData isEqualToData:actualData]) {
+                        NSString *actualDataString = [[NSString alloc] initWithData:actualData encoding:NSASCIIStringEncoding];
+#if !__has_feature(objc_arc)
+                        [actualDataString autorelease];
+#endif
                         printf("FAILED expected data %s (%s) for %s but got %s (%s)\n",
                                [[expectedData description] UTF8String],
                                [expectedStr UTF8String],
                                [[originalObject description] UTF8String],
                                [[actualData description] UTF8String],
-                               [[[[NSString alloc] initWithData:actualData encoding:NSASCIIStringEncoding] autorelease] UTF8String]
+                               [actualDataString UTF8String]
                                );
                         exit(1);
                     }

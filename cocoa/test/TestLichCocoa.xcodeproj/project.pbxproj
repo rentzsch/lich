@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7975047218D2880800E9D0C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7975047118D2880800E9D0C4 /* Foundation.framework */; };
-		7975048018D2885500E9D0C4 /* TestLichCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975047F18D2885500E9D0C4 /* TestLichCocoa.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7975049618D28AA600E9D0C4 /* LichTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975049518D28AA600E9D0C4 /* LichTokenizer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7975049918D28B6E00E9D0C4 /* JRErr.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975049818D28B6E00E9D0C4 /* JRErr.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7975049C18D28B7400E9D0C4 /* LichCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975049B18D28B7400E9D0C4 /* LichCocoa.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7975048018D2885500E9D0C4 /* TestLichCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975047F18D2885500E9D0C4 /* TestLichCocoa.m */; };
+		7975049618D28AA600E9D0C4 /* LichTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975049518D28AA600E9D0C4 /* LichTokenizer.m */; };
+		7975049C18D28B7400E9D0C4 /* LichCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975049B18D28B7400E9D0C4 /* LichCocoa.m */; };
+		797504A218D29F3C00E9D0C4 /* JRErr.m in Sources */ = {isa = PBXBuildFile; fileRef = 797504A118D29F3C00E9D0C4 /* JRErr.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,10 +33,10 @@
 		7975047F18D2885500E9D0C4 /* TestLichCocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLichCocoa.m; sourceTree = SOURCE_ROOT; };
 		7975049418D28AA600E9D0C4 /* LichTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LichTokenizer.h; path = ../LichTokenizer.h; sourceTree = SOURCE_ROOT; };
 		7975049518D28AA600E9D0C4 /* LichTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LichTokenizer.m; path = ../LichTokenizer.m; sourceTree = SOURCE_ROOT; };
-		7975049718D28B6E00E9D0C4 /* JRErr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRErr.h; path = ../deps/JRErr.h; sourceTree = SOURCE_ROOT; };
-		7975049818D28B6E00E9D0C4 /* JRErr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRErr.m; path = ../deps/JRErr.m; sourceTree = SOURCE_ROOT; };
 		7975049A18D28B7400E9D0C4 /* LichCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LichCocoa.h; path = ../LichCocoa.h; sourceTree = SOURCE_ROOT; };
 		7975049B18D28B7400E9D0C4 /* LichCocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LichCocoa.m; path = ../LichCocoa.m; sourceTree = SOURCE_ROOT; };
+		797504A018D29F3C00E9D0C4 /* JRErr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRErr.h; path = ../dependancies/JRErr/JRErr/JRErr.h; sourceTree = SOURCE_ROOT; };
+		797504A118D29F3C00E9D0C4 /* JRErr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRErr.m; path = ../dependancies/JRErr/JRErr/JRErr.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +84,8 @@
 				7975049518D28AA600E9D0C4 /* LichTokenizer.m */,
 				7975049A18D28B7400E9D0C4 /* LichCocoa.h */,
 				7975049B18D28B7400E9D0C4 /* LichCocoa.m */,
-				7975049718D28B6E00E9D0C4 /* JRErr.h */,
-				7975049818D28B6E00E9D0C4 /* JRErr.m */,
+				797504A018D29F3C00E9D0C4 /* JRErr.h */,
+				797504A118D29F3C00E9D0C4 /* JRErr.m */,
 				7975047618D2880800E9D0C4 /* Supporting Files */,
 			);
 			path = TestLichCocoa;
@@ -150,10 +150,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7975049918D28B6E00E9D0C4 /* JRErr.m in Sources */,
 				7975048018D2885500E9D0C4 /* TestLichCocoa.m in Sources */,
 				7975049618D28AA600E9D0C4 /* LichTokenizer.m in Sources */,
 				7975049C18D28B7400E9D0C4 /* LichCocoa.m in Sources */,
+				797504A218D29F3C00E9D0C4 /* JRErr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

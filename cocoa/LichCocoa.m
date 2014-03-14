@@ -136,6 +136,7 @@
     return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
     [_data release];
     [_topLevelTokens release];
@@ -143,11 +144,15 @@
     [_error release];
     [super dealloc];
 }
+#endif
 
 - (id)decodeData:(NSData*)data error:(NSError**)error {
     self.data = data;
     
-    LichTokenizer *tokenizer = [[[LichTokenizer alloc] init] autorelease];
+    LichTokenizer *tokenizer = [[LichTokenizer alloc] init];
+#if !__has_feature(objc_arc)
+    [tokenizer autorelease];
+#endif
     tokenizer.observer = self;
     JRPushErr([tokenizer tokenizeNextChunk:data error:jrErrRef]);
     if (!jrErr && self.error) {
@@ -250,7 +255,10 @@
             break;
         default:{
             // Stream of atoms. Fabricate a top-level token.
-            LichToken *root = [[[LichToken alloc] init] autorelease];
+            LichToken *root = [[LichToken alloc] init];
+#if !__has_feature(objc_arc)
+            [root autorelease];
+#endif
             root->parsedType = LichArrayElementType;
             [root.children addObjectsFromArray:self.topLevelTokens];
             self.result = JRPushErr([self parseTokenTree:root error:jrErrRef]);

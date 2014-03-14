@@ -24,10 +24,12 @@
     return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
     [_children release];
     [super dealloc];
 }
+#endif
 
 - (NSDictionary*)debugDict {
     return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -75,11 +77,13 @@
     return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
     [_allocatedTokens release];
     [_sizeAccumulator release];
     [super dealloc];
 }
+#endif
 
 #define kMaxSizePrefixLength 20
 
@@ -242,7 +246,10 @@
 }
 
 - (void)pushNewCurrentTokenWithInputPositionAndByte:(uint8_t)byte {
-    LichToken *token = [[[LichToken alloc] init] autorelease];
+    LichToken *token = [[LichToken alloc] init];
+#if !__has_feature(objc_arc)
+    [token autorelease];
+#endif
     [self.allocatedTokens addObject:token];
     
     token->sizeDeclarationRange = NSMakeRange(self.inputPos, 1);
