@@ -29,10 +29,6 @@
     [super dealloc];
 }
 
-static id nilIsNull(id obj) {
-    return obj ? obj : [NSNull null];
-}
-
 - (NSDictionary*)debugDict {
     return [NSDictionary dictionaryWithObjectsAndKeys:
      [NSString stringWithFormat:@"<%@: %p>", [self class], self], @"self",
