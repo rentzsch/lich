@@ -23,7 +23,7 @@ extern NSString* NSStringFromLichElementType(LichElementType type);
     NSRange          contentRange;
     NSRange          closingMarkerRange;
     
-    NSUInteger       parsedSize;
+    uint64_t         parsedSize;
     LichElementType  parsedType;
 }
 @property(assign)  LichToken        *parent;

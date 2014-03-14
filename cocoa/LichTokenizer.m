@@ -38,7 +38,7 @@
      [NSValue valueWithRange:openingMarkerRange], @"openingMarkerRange",
      [NSValue valueWithRange:contentRange], @"contentRange",
      [NSValue valueWithRange:closingMarkerRange], @"closingMarkerRange",
-     [NSNumber numberWithUnsignedInteger:parsedSize], @"parsedSize",
+     [NSNumber numberWithUnsignedLongLong:parsedSize], @"parsedSize",
      NSStringFromLichElementType(parsedType), @"parsedType",
      self.parent ? [NSString stringWithFormat:@"<%@: %p>", [self.parent class], self.parent] : [NSNull null], @"parent",
      [self valueForKeyPath:@"children.debugDict"], @"children",
@@ -135,13 +135,13 @@
                             self.sizeAccumulator = nil;
                             if (self.currentToken->parsedSize) {
                                 self.currentToken->contentRange = NSMakeRange(self.inputPos + 1,
-                                                                              self.currentToken->parsedSize);
+                                                                              (NSUInteger)self.currentToken->parsedSize);
                             } else {
                                 self.currentToken->contentRange = NSMakeRange(NSNotFound, 0);
                             }
                             self.currentToken->closingMarkerRange = NSMakeRange(self.inputPos
                                                                                 + 1
-                                                                                + self.currentToken->parsedSize,
+                                                                                + (NSUInteger)self.currentToken->parsedSize,
                                                                                 1);
                             switch (b) {
                                 case '<':
