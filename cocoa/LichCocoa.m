@@ -270,3 +270,190 @@
 }
 
 @end
+
+//-----------------------------------------------------------------------------------------
+#pragma mark - Serializing
+
+@implementation NSString (LichExtensions)
+
+- (NSData*)lich_utf8Data {
+    return [self dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+@end
+
+@implementation NSNumber (LichExtensions)
+
+- (NSData*)lich_int8Data {
+    int8_t resultValue = [self charValue];
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_uint8Data {
+    uint8_t resultValue = [self unsignedCharValue];
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_int16Data {
+    int16_t resultValue = [self shortValue];
+    resultValue = CFSwapInt16HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_uint16Data {
+    uint16_t resultValue = [self unsignedShortValue];
+    resultValue = CFSwapInt16HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_int32Data {
+    int32_t resultValue = [self intValue];
+    resultValue = CFSwapInt32HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_uint32Data {
+    uint32_t resultValue = [self unsignedIntValue];
+    resultValue = CFSwapInt32HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_int64Data {
+    int64_t resultValue = [self longLongValue];
+    resultValue = CFSwapInt64HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_uint64Data {
+    uint64_t resultValue = [self unsignedLongLongValue];
+    resultValue = CFSwapInt64HostToBig(resultValue);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_float32Data {
+    CFSwappedFloat32 resultValue = CFConvertFloatHostToSwapped([self floatValue]);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+- (NSData*)lich_float64Data {
+    CFSwappedFloat64 resultValue = CFConvertDoubleHostToSwapped([self doubleValue]);
+    return [NSData dataWithBytes:(const void *)&resultValue
+                          length:sizeof(resultValue)];
+}
+
+@end
+
+//-----------------------------------------------------------------------------------------
+#pragma mark - Deserializing
+
+@implementation NSData (LichExtensions)
+
+- (NSString*)lich_str {
+    NSString *result = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
+#if !__has_feature(objc_arc)
+    [result autorelease];
+#endif
+    return result;
+}
+
+- (int32_t)lich_int8 {
+    int8_t result;
+    
+    NSAssert2([self length] == sizeof(result),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(result),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&result];
+    return result;
+}
+
+- (uint32_t)lich_uint8 {
+    return [self lich_int8];
+}
+
+- (int32_t)lich_int16 {
+    int16_t result;
+    
+    NSAssert2([self length] == sizeof(result),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(result),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&result];
+    result = CFSwapInt16BigToHost(result);
+    return result;
+}
+
+- (uint32_t)lich_uint16 {
+    return [self lich_int16];
+}
+
+- (int32_t)lich_int32 {
+    int32_t result;
+    
+    NSAssert2([self length] == sizeof(result),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(result),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&result];
+    result = CFSwapInt32BigToHost(result);
+    return result;
+}
+
+- (uint32_t)lich_uint32 {
+    return [self lich_int32];
+}
+
+- (int64_t)lich_int64 {
+    int64_t result;
+    
+    NSAssert2([self length] == sizeof(result),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(result),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&result];
+    result = CFSwapInt64BigToHost(result);
+    return result;
+}
+
+- (uint64_t)lich_uint64 {
+    return [self lich_int64];
+}
+
+- (float)lich_float32 {
+    CFSwappedFloat32 buffer;
+    
+    NSAssert2([self length] == sizeof(buffer),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(buffer),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&buffer];
+    return CFConvertFloatSwappedToHost(buffer);
+}
+
+- (double)lich_float64 {
+    CFSwappedFloat64 buffer;
+    
+    NSAssert2([self length] == sizeof(buffer),
+              @"Lich: incorrect data size (expected:%zu actual:%lu)",
+              sizeof(buffer),
+              (unsigned long)[self length]);
+    
+    [self getBytes:&buffer];
+    return CFConvertDoubleSwappedToHost(buffer);
+}
+
+@end
