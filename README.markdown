@@ -110,7 +110,7 @@ How ghoulishly poetic.
 
 ### See Also
 
-* [Tagged Netstrings](http://tnetstrings.org/) (thanks to [
+* [Tagged Netstrings](http://tnetstrings.info/) (thanks to [
 Benjamin Pollack](https://twitter.com/bitquabit/status/253961353402925057))
 * [MessagePack](http://msgpack.org/)
 
